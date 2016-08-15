@@ -5,22 +5,23 @@
 #include <lualib.h>
 #include <lauxlib.h>
 
-/* the Lua interpreter */
-lua_State* L;
-
-int main()
+int
+main()
 {
-        /* initialize Lua */
-        L = luaL_newstate();
+	/* the Lua interpreter */
+	lua_State* l;
 
-        /* load Lua base libraries */
-	luaL_openlibs(L);
+	/* initialize Lua */
+	l = luaL_newstate();
 
-	luaL_dofile (L, "lua1.lua");
+	/* load Lua base libraries */
+	luaL_openlibs (l);
 
-        /* cleanup Lua */
-        lua_close(L);
+	luaL_dofile (l, "lua1.lua");
 
-        return 0;
+	/* cleanup Lua */
+	lua_close (l);
+
+	return 0;
 }
 

@@ -7,25 +7,26 @@
 
 #define VERSION "0.7"
 
-/* the Lua interpreter */
-lua_State* L;
-
-int main()
+int
+main()
 {
-        /* initialize Lua */
-        L = luaL_newstate();
+	/* the Lua interpreter */
+	lua_State *l;
 
-        /* load Lua base libraries */
-	luaL_openlibs(L);
+	/* initialize Lua */
+	l = luaL_newstate();
 
-	lua_pushstring(L, VERSION);
-	lua_setglobal(L, "VERSION");
+	/* load Lua base libraries */
+	luaL_openlibs (l);
 
-	luaL_dofile (L, "lua3.lua");
+	lua_pushstring (l, VERSION);
+	lua_setglobal (l, "VERSION");
 
-        /* cleanup Lua */
-        lua_close(L);
+	luaL_dofile (l, "lua3.lua");
 
-        return 0;
+	/* cleanup Lua */
+	lua_close (l);
+
+	return 0;
 }
 

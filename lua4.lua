@@ -1,4 +1,3 @@
-
 -- The variables are set by default
 print("apple", apple)
 print("banana", banana)

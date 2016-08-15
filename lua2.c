@@ -1,60 +1,62 @@
 #include <stdio.h>
 
-#include "lua.h"
-#include "lualib.h"
-#include "lauxlib.h"
-
-/* the Lua interpreter */
-lua_State* L;
+#include <lua.h>
+#include <lualib.h>
+#include <lauxlib.h>
 
 /* The function we'll call from the lua script */
-static int average(lua_State *L)
+int
+average (lua_State *l)
 {
 	/* get number of arguments */
-	int n = lua_gettop(L);
+	int n = lua_gettop (l);
 	double sum = 0;
 	int i;
 
 	/* loop through each argument */
 	for (i = 1; i <= n; i++)
 	{
-		if (!lua_isnumber(L, i))
+		if (!lua_isnumber (l, i))
 		{
-			lua_pushstring(L, "Incorrect argument to 'average'");
-			lua_error(L);
+			lua_pushstring (l, "Incorrect argument to 'average'");
+			lua_error (l);
 		}
 
 		/* total the arguments */
-		sum += lua_tonumber(L, i);
+		sum += lua_tonumber (l, i);
 	}
 
 	/* push the average */
-	lua_pushnumber(L, sum / n);
+	lua_pushnumber (l, sum / n);
 
 	/* push the sum */
-	lua_pushnumber(L, sum);
+	lua_pushnumber (l, sum);
 
 	/* return the number of results */
 	return 2;
 }
 
 
-int main()
+int
+main()
 {
+	/* the Lua interpreter */
+	lua_State *l;
+
 	/* initialize Lua */
-	L = luaL_newstate();
+	l = luaL_newstate();
 
 	/* load Lua base libraries */
-	luaL_openlibs(L);
+	luaL_openlibs (l);
 
 	/* register our function */
-	lua_register(L, "average", average);
+	lua_register (l, "average", average);
 
 	/* run the script */
-	luaL_dofile(L, "lua2.lua");
+	luaL_dofile (l, "lua2.lua");
 
 	/* cleanup Lua */
-	lua_close(L);
+	lua_close (l);
 
 	return 0;
 }
