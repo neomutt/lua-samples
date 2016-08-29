@@ -2,21 +2,14 @@
 
 LIBS=$(pkg-config --libs lua)
 
-gcc -Wall $LIBS -o lua1 lua1.c
-gcc -Wall $LIBS -o lua2 lua2.c
-gcc -Wall $LIBS -o lua3 lua3.c
-gcc -Wall $LIBS -o lua4 lua4.c
-gcc -Wall $LIBS -o array array.c
+for i in {1..5}; do
+	gcc -Wall $LIBS -o lua$i lua$i.c || break
+	echo
+	./lua$i
+done
 
 echo
-./lua1
-echo
-./lua2
-echo
-./lua3
-echo
-./lua4
-echo
+gcc -Wall $LIBS -o array array.c
 ./array
 echo
 
