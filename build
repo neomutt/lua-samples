@@ -11,5 +11,9 @@ done
 echo
 gcc -Wall $LIBS -o array array.c
 ./array
+
+echo
+gcc -Wall $LIBS -o override override.c
+./override
 echo
 

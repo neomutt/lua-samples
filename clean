@@ -2,4 +2,5 @@
 
 rm -f lua{1,2,3,4,5}
 rm -f array
+rm -f override
 
