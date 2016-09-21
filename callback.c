@@ -14,10 +14,8 @@ average (lua_State *l)
 	int i;
 
 	/* loop through each argument */
-	for (i = 1; i <= n; i++)
-	{
-		if (!lua_isnumber (l, i))
-		{
+	for (i = 1; i <= n; i++) {
+		if (!lua_isnumber (l, i)) {
 			lua_pushstring (l, "Incorrect argument to 'average'");
 			lua_error (l);
 		}
@@ -25,6 +23,9 @@ average (lua_State *l)
 		/* total the arguments */
 		sum += lua_tonumber (l, i);
 	}
+
+	/* clear the stack */
+	lua_pop (l, n);
 
 	/* push the average */
 	lua_pushnumber (l, sum / n);
@@ -40,11 +41,8 @@ average (lua_State *l)
 int
 main()
 {
-	/* the Lua interpreter */
-	lua_State *l;
-
 	/* initialize Lua */
-	l = luaL_newstate();
+	lua_State *l = luaL_newstate();
 
 	/* load Lua base libraries */
 	luaL_openlibs (l);
@@ -53,7 +51,7 @@ main()
 	lua_register (l, "average", average);
 
 	/* run the script */
-	luaL_dofile (l, "lua2.lua");
+	luaL_dofile (l, "callback.lua");
 
 	/* cleanup Lua */
 	lua_close (l);

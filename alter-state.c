@@ -7,11 +7,8 @@
 int
 main()
 {
-	/* the Lua interpreter */
-	lua_State* l;
-
 	/* initialize Lua */
-	l = luaL_newstate();
+	lua_State *l = luaL_newstate();
 
 	/* load Lua base libraries */
 	luaL_openlibs (l);
@@ -25,9 +22,9 @@ main()
         lua_setglobal (l, "cherry");
 
 	/* run the script */
-	luaL_dofile (l, "lua4.lua");
-	luaL_dofile (l, "lua4.lua");
-	luaL_dofile (l, "lua4.lua");
+	luaL_dofile (l, "alter-state.lua");
+	luaL_dofile (l, "alter-state.lua");
+	luaL_dofile (l, "alter-state.lua");
 
         // lua_pushglobaltable (l);       // Get global table
         // lua_pushnil (l);               // put a nil key on stack

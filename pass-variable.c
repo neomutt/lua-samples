@@ -5,23 +5,21 @@
 #include <lualib.h>
 #include <lauxlib.h>
 
+#define VERSION "0.7"
+
 int
 main()
 {
-	/* the Lua interpreter */
-	lua_State* l;
-
 	/* initialize Lua */
-	l = luaL_newstate();
+	lua_State *l = luaL_newstate();
 
 	/* load Lua base libraries */
 	luaL_openlibs (l);
 
-	luaL_dofile (l, "lua5.lua");
+	lua_pushstring (l, VERSION);
+	lua_setglobal (l, "VERSION");
 
-	int n = lua_gettop (l);
-	printf ("stack = %d\n", n);
-	printf ("num = %lld\n", lua_tointeger (l, 1));
+	luaL_dofile (l, "pass-variable.lua");
 
 	/* cleanup Lua */
 	lua_close (l);

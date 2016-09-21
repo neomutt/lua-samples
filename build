@@ -2,18 +2,14 @@
 
 LIBS=$(pkg-config --libs lua)
 
-for i in {1..5}; do
-	gcc -Wall $LIBS -o lua$i lua$i.c || break
+PROGS="alter-state array callback override pass-variable return-value simple-call"
+
+for i in $PROGS; do
+	echo "---------------------------------------"
+	echo "${i^^}"
 	echo
-	./lua$i
+	gcc -Wall $LIBS -o $i $i.c || break
+	./$i
+	echo
 done
-
-echo
-gcc -Wall $LIBS -o array array.c
-./array
-
-echo
-gcc -Wall $LIBS -o override override.c
-./override
-echo
 

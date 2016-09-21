@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm -f lua{1,2,3,4,5}
-rm -f array
-rm -f override
+PROGS="alter-state array callback override pass-variable return-value simple-call"
+
+rm -f $PROGS
 
